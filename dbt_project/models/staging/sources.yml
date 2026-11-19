@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    database: indrive_warehouse
+    schema: dbt_dev
+    tables:
+      - name: raw_drivers
+      - name: raw_vehicles
+      - name: raw_zones
+      - name: raw_ride_events
+        # `dbt source freshness` compares max(checkout_at) with now()
+        loaded_at_field: checkout_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}

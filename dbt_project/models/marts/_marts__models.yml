@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_vehicle
+    columns:
+      - name: vehicle_id
+        tests:
+          - unique
+          - not_null
+      - name: vehicle_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['economy', 'comfort', 'xl']
+
+  - name: dim_zone
+    columns:
+      - name: zone_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_rides
+    columns:
+      - name: ride_id
+        tests:
+          - unique
+          - not_null
+      - name: driver_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('snap_drivers')
+                field: driver_id
+      - name: pickup_zone_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zone')
+                field: zone_id
+      - name: dropoff_zone_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_zone')
+                field: zone_id

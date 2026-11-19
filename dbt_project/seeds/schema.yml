@@ -1,0 +1,38 @@
+=version: 2
+
+seeds:
+  - name: raw_drivers
+    description: "Référentiel brut des chauffeurs InDrive (chargé via dbt seed)."
+    config:
+      column_types:
+        driver_id: integer
+        rating: numeric(3,2)
+        joined_date: date
+
+  - name: raw_vehicles
+    description: "Référentiel brut des véhicules associés aux chauffeurs."
+    config:
+      column_types:
+        vehicle_id: integer
+        driver_id: integer
+
+  - name: raw_zones
+    description: "Référentiel brut des zones géographiques de Casablanca."
+    config:
+      column_types:
+        zone_id: integer
+
+  - name: raw_ride_events
+    description: "Journal brut des événements de courses et négociations de tarifs."
+    config:
+      column_types:
+        event_id: integer
+        ride_id: integer
+        driver_id: integer
+        vehicle_id: integer
+        pickup_zone_id: integer
+        dropoff_zone_id: integer
+        proposed_fare_mad: numeric(10,2)
+        agreed_fare_mad: numeric(10,2)
+        distance_km: numeric(6,2)
+        event_timestamp: timestamp
