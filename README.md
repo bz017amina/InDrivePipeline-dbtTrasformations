@@ -134,4 +134,4 @@ sans multiplier les objets physiques dans la base.
 
 ## Preuve que ça tourne
 
-(images/dbtRun.png)
+![Preuve exécution dbt run et dbt test](images/dbtRUN.png)
